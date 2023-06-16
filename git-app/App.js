@@ -1,12 +1,14 @@
 import {  View } from 'react-native';
-import ParentComponent from './component/screen1';
+import MyStack from './component/redux/navigation';
+import { Provider } from 'react-redux';
+import store from "./component/redux/store"
 
 
 export default function App() {
   return (
-    <View style={{flex:1}}>
-    <ParentComponent/>
-    </View>
+    <Provider store={store}>
+      <MyStack></MyStack>
+    </Provider>
   );
 }
 

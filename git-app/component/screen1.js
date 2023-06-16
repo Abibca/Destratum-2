@@ -2,7 +2,8 @@ import { View, Text, Button, TextInput, StyleSheet, TouchableOpacity, Image, Scr
 import { useState } from "react";
 
 
-const ParentComponent = () => {
+const Screen = ({navigation}) => {
+    const [submit,setSubmit] = useState(false)
     const [name, setname] = useState('');
     const ChangeName = (e) => {
         setname(e)
@@ -15,11 +16,21 @@ const ParentComponent = () => {
         setAddress(e)
     }
 
-    const [phone, setPhoneNo] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
 
     const ChangePhone = (e) => {
-        setPhoneNo(e)
+        setPhoneNumber(e)
     }
+
+    const HandleSubmit = () => {
+        setSubmit(!submit);
+        navigation.navigate('data', {
+            name,
+            phoneNumber,
+            address,
+        });
+
+    } 
 
     return (
         <ScrollView>
@@ -66,12 +77,12 @@ const ParentComponent = () => {
                         backgroundColor: "#FFF8DC",
                     }}
                     onChangeText={ChangePhone}
-                    value={phone}
+                    value={phoneNumber}
                     keyboardType="numeric"
                 /></View>
 
             <TouchableOpacity
-                style={styles.button}
+                style={styles.button} onPress={HandleSubmit}
             >
                 <Text style={{ padding: 8 }}>Press Me</Text>
             </TouchableOpacity>
@@ -114,4 +125,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ParentComponent;
+export default Screen;
